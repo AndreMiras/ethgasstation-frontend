@@ -16,11 +16,11 @@
       }
 
       $defiPulse = new ad();
-      $defiPulse->desktopLink = 'http://bit.ly/3c1v8ds';
-      $defiPulse->mobileLink = 'http://bit.ly/3c1v8ds';
-      $defiPulse->desktopImg = '/images/farmer_desktop_purple.svg';
-      $defiPulse->mobileImg = '/images/farmer_mobile_purple.svg';
-      $defiPulse->alt = 'DFP Farmer Newsletter';
+      $defiPulse->desktopLink = 'https://bit.ly/3kItGCD';
+      $defiPulse->mobileLink = 'https://bit.ly/3znk5oW';
+      $defiPulse->desktopImg = '/images/chainlink/chainlink_desktop.svg';
+      $defiPulse->mobileImg = '/images/chainlink/chainlink_mobile.svg';
+      $defiPulse->alt = 'Chainlink Banner';
 
       $ads = array($defiPulse);
 
