@@ -30,7 +30,7 @@ import redis.exceptions
     poor access rules set, this file may leak these credentials.
 """
 REDIS_INFO = {
-    'host': 'localhost',
+    'host': (os.environ.get("REDIS_HOST") or "localhost"),
     'port': 6379,
     'auth': None
 }

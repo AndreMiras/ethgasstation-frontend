@@ -41,6 +41,13 @@ so this frontend will get the files it needs.
 If you are having trouble, make sure that json files are in `json/` and you can
 view the JSON files appropriately.
 
+#### Docker
+It is also possible to run the frontned as a Docker container.
+
+1. Run the [ethgasstation-backend](https://github.com/SettleFinance/ethgasstation-backend) with docker-compose
+2. Back to the frontend to copy/edit the environment variables: `cp .env.example .env`
+3. Run `docker-compose up`
+
 #### Using Redis with this legacy frontend
 
 It is possible to separate the backend and frontend, and not run all of the ETH
