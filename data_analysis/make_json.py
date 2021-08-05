@@ -21,6 +21,7 @@ import time
 
 from redis import StrictRedis
 import redis.exceptions
+from fetch_eip1559_data import fetch_data
 
 
 """
@@ -79,6 +80,7 @@ def main():
                     print("Output directory invalid.", file=sys.stderr)
                     sys.exit(1)
 
+                fetch_data(output_dir)
                 for redis_key in REDIS_JSON_DATA_FILES:
                     filename = redis_key[1:] + '.json'
                     output_filepath = os.path.join(output_dir, filename)
