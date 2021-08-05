@@ -150,6 +150,49 @@
                     </div>
                   </div>
                 </div>
+
+                <div class="<?php echo (isset($_GET['eip1559']) ? "show" : "hidden") ?>">
+                  <div class="top_tiles_title">
+                    Recommended (<a href="https://ethgasstation.info/blog/eip-1559/">EIP-1559</a>) tipping
+                  </div>
+
+                  <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+                    <div>
+                      <div class="count fast">
+                        <?php echo ($gpTip['instant']) ?>
+                      </div>
+                      <div class="divider"></div>
+                      <div class="text-container">
+                        <div class="count_top"><span>trader</span><span>< ASAP</span></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+                    <div>
+                      <div class="count standard">
+                        <?php echo ($gpTip['fast']) ?>
+                      </div>
+                      <div class="divider"></div>
+                      <div class="text-container">
+                        <div class="count_top"><span>fast</span><span>< 2m</span></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+                    <div>
+                      <div class="count safe_low" id="medTxTip">
+                        <?php echo ($gpTip['standard']) ?>
+                      </div>
+                      <div class="divider"></div>
+                      <div class="text-container">
+                        <div class="count_top"><span>standard</span><span>< 5m</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
           <!-- /top tiles end -->

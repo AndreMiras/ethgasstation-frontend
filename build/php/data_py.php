@@ -29,6 +29,9 @@ $gpRecs2 = json_decode($gpRecsString2, true);
 $predictString = get_json_file("predictTable.json");
 $predictTable = json_decode($predictString, true);
 
+$gpTipString = get_json_file("max-priority-fee-per-gas-estimate.json");
+$gpTip = json_decode($gpTipString, true);
+
 $rowString = get_json_file("txDataLast10k.json");
 $row = json_decode($rowString, true);
 // Get values for Misc transactions table
