@@ -1,0 +1,32 @@
+version: "3"
+services:
+  frontend:
+    image: php:7.4-cli
+    working_dir: /app
+    command: php -S 0.0.0.0:8000
+    environment:
+      - JSON_LOCATION
+    ports:
+      - "8000:8000"
+    networks:
+      # access to the backend database
+      - ethgasstation-backend_default
+    volumes:
+      - ./:/app
+  worker:
+    image: python:3.6-slim
+    working_dir: /app
+    command: |
+      bash -c "pip install redis && mkdir -p json && python /app/data_analysis/make_json.py $JSON_LOCATION"
+    environment:
+      - JSON_LOCATION
+      - REDIS_HOST
+    networks:
+      # access to the backend cache
+      - ethgasstation-backend_default
+    volumes:
+      - ./:/app
+# share the same network as the backend so its database and cache can be used
+networks:
+  ethgasstation-backend_default:
+    external: true
