@@ -21,7 +21,7 @@ import time
 
 from redis import StrictRedis
 import redis.exceptions
-from fetch_eip1559_data import fetch_data
+from fetch_eip1559_data import fetch_all
 
 
 """
@@ -46,6 +46,7 @@ REDIS_JSON_DATA_FILES = [
     '_miners',
     '_topMiners'
 ]
+
 
 def main():
     """int main()"""
@@ -80,7 +81,7 @@ def main():
                     print("Output directory invalid.", file=sys.stderr)
                     sys.exit(1)
 
-                fetch_data(output_dir)
+                fetch_all(output_dir)
                 for redis_key in REDIS_JSON_DATA_FILES:
                     filename = redis_key[1:] + '.json'
                     output_filepath = os.path.join(output_dir, filename)
@@ -103,7 +104,7 @@ def main():
                                 f.write(json.dumps(jsondata, ensure_ascii=True, allow_nan=False))
                                 json_hashes[filename] = json_hash
 
-                        except (json.JSONDecodeError, ValueError) as e:
+                        except (json.JSONDecodeError, ValueError):
                             print("Redis data retrieved for %s is invalid JSON, skipping write." % redis_key, file=sys.stderr)
             time.sleep(15)
         except KeyboardInterrupt:

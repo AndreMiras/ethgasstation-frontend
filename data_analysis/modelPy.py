@@ -4,13 +4,9 @@ import matplotlib
 matplotlib.use('Agg')
 import mysql.connector
 import pandas as pd
-import numpy as np 
+import numpy as np
 import statsmodels.api as sm
-import math
-import sys
-import os, subprocess, re
-import urllib,json
-from sqlalchemy import create_engine 
+from sqlalchemy import create_engine
 from patsy import dmatrices
 
 
@@ -54,8 +50,8 @@ print (len(predictData))
 predictData = predictData.dropna(subset=['hashpower_accepting2'])
 print (len(predictData))
 
-#with pd.option_context('display.max_columns', None,):
-    #print(predictData)
+# with pd.option_context('display.max_columns', None,):
+#     print(predictData)
 
 print('gas offered data')
 max_gasoffered = predictData['gas_offered'].max()
@@ -103,7 +99,6 @@ print ("violations > 40gwei")
 print(viol50)
 print ("total > 40 gwei")
 print(count50)
-
 
 
 '''

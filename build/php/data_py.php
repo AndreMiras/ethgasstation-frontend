@@ -32,6 +32,9 @@ $predictTable = json_decode($predictString, true);
 $gpTipString = get_json_file("max-priority-fee-per-gas-estimate.json");
 $gpTip = json_decode($gpTipString, true);
 
+$baseFeeString = get_json_file("base-fee-per-gas.json");
+$baseFee = json_decode($baseFeeString, true);
+
 $rowString = get_json_file("txDataLast10k.json");
 $row = json_decode($rowString, true);
 // Get values for Misc transactions table

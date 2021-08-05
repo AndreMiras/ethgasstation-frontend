@@ -18,7 +18,10 @@ logger = logging.getLogger(__name__)
 
 NETWORK = "mainnet"
 BASE_URL = "https://egs-backend-v2-staging.defipulse.com"
-ENDPOINT = f"/api/max-priority-fee-per-gas-estimate?network={NETWORK}"
+ENDPOINTS = (
+    f"/api/max-priority-fee-per-gas-estimate?network={NETWORK}",
+    f"/api/base-fee-per-gas?network={NETWORK}",
+)
 
 
 def url2filename(url: str):
@@ -33,23 +36,26 @@ def url2filename(url: str):
     return f"{basename}.json"
 
 
-def fetch_data(destination: str):
-    url = f"{BASE_URL}{ENDPOINT}"
+def fetch_data(url: str, destination: str):
     filename = url2filename(url)
     destination = Path(destination) / filename
     try:
         response = urllib.request.urlopen(url)
-        content = response.read()
-    except urllib.error.HTTPError as e:
+    except urllib.error.HTTPError:
         extra = {"url": url}
         logger.error("Error fetching from backend", exc_info=True, extra=extra)
-        # hacky gracefully fail (most-likely pre-london)
-        # we want to still display data
-        # ideally some of this should also be handled frontend side
-        # but we prefer not to touch the legacy (PHP) frontend too much
-        content = b'{"instant":2,"fast":1,"standard":1}'
+        # it's OK to fail sometimes and miss a few calls as long as the file was
+        # already created once. The frontend would simply show some outdated data
+        return
+    content = response.read()
     with open(destination, "w") as f:
         f.write(content.decode())
+
+
+def fetch_all(destination: str):
+    for endpoint in ENDPOINTS:
+        url = f"{BASE_URL}{endpoint}"
+        fetch_data(url, destination)
 
 
 def main():
@@ -61,7 +67,7 @@ def main():
         help="Destination directory for dumping the JSON files",
     )
     args = parser.parse_args()
-    fetch_data(args.destination)
+    fetch_all(args.destination)
 
 
 if __name__ == "__main__":
