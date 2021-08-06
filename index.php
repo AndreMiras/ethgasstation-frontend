@@ -102,64 +102,24 @@
         <!-- page content starts -->
         <div class="right_col page_content_container" role="main">
           <div class="page_content">
+
+          <div class="<?php echo (isset($_GET['eip1559']) ? "show" : "hidden") ?>">
+            <div class="top_tiles_title">Transaction Type</div>
+            <div class="btn-group btn-toggle"> 
+              <button id="legacy-tx" class="btn btn-sm btn-primary" active>Pre EIP-1559 (legacy)</button>
+              <button id="new-tx" class="btn btn-sm btn-default">Post EIP-1559 </button>
+            </div>
+          </div>
+          
             <!-- top tiles start -->
             <div class="row tile_count">
               <div class="rgp">
-                <div class="top_tiles_title">Recommended Gas Prices in Gwei</div>
-                <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
-                  <div>
-                    <div class="count fast">
-                      <?php echo ($gpRecs2['fastest']/10) ?>
-                    </div>
-                    <div class="divider"></div>
-                    <div class="text-container">
-                      <div class="count_top"><span>trader</span><span>< ASAP</span></div>
-                      <!-- <div class="count_top usd">
-                        <?php // $fee = round($gpRecs2['fastest']*21000/1e9*$exchangeRate/10, 3); echo($currString . $fee . ' / Transfer'); ?>
-                      </div> -->
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
-                  <div>
-                    <div class="count standard">
-                      <?php echo ($gpRecs2['fast']/10) ?>
-                    </div>
-                    <div class="divider"></div>
-                    <div class="text-container">
-                      <div class="count_top"><span>fast</span><span>< 2m</span></div>
-                      <!-- <div class="count_top usd">
-                        <?php // $fee = round($gpRecs2['fast']*21000/1e9*$exchangeRate/10, 3); echo($currString . $fee . ' / Transfer'); ?>
-                      </div> -->
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
-                  <div>
-                    <div class="count safe_low" id="medTx">
-                      <?php echo ($gpRecs2['average']/10) ?>
-                    </div>
-                    <div class="divider"></div>
-                    <div class="text-container">
-                      <div class="count_top"><span>standard</span><span>< 5m</span></div>
-                      <!-- <div class="count_top usd">
-                        <?php // $fee = round($gpRecs2['average']*21000/1e9*$exchangeRate/10, 3); echo($currString . $fee . ' / Transfer'); ?>
-                      </div> -->
-                    </div>
-                  </div>
-                </div>
-
-                <div class="<?php echo (isset($_GET['eip1559']) ? "show" : "hidden") ?>">
-                  <div class="top_tiles_title">
-                    Recommended (<a href="https://ethgasstation.info/blog/eip-1559/">EIP-1559</a>) tipping
-                  </div>
-
+                <div class="legacy-tx-type">
+                  <div class="top_tiles_title">Recommended Gas Prices in Gwei</div>
                   <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
                     <div>
                       <div class="count fast">
-                        <?php echo ($gpTip['instant']) ?>
+                        <?php echo ($gpRecs2['fastest']/10) ?>
                       </div>
                       <div class="divider"></div>
                       <div class="text-container">
@@ -171,7 +131,7 @@
                   <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
                     <div>
                       <div class="count standard">
-                        <?php echo ($gpTip['fast']) ?>
+                        <?php echo ($gpRecs2['fast']/10) ?>
                       </div>
                       <div class="divider"></div>
                       <div class="text-container">
@@ -182,8 +142,8 @@
 
                   <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
                     <div>
-                      <div class="count safe_low" id="medTxTip">
-                        <?php echo ($gpTip['standard']) ?>
+                      <div class="count safe_low" id="medTx">
+                        <?php echo ($gpRecs2['average']/10) ?>
                       </div>
                       <div class="divider"></div>
                       <div class="text-container">
@@ -193,11 +153,61 @@
                   </div>
                 </div>
 
+                <div class="new-tx-type" style="display:none">
+                  <div class="<?php echo (isset($_GET['eip1559']) ? "show" : "hidden") ?>">
+
+                    <div class="top_tiles_title">
+                      Recommended Priority Fee (miner tip) in Gwei:
+                    </div>
+
+                    <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+                      <div>
+                        <div class="count fast">
+                          <?php echo ($gpTip['instant']) ?>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="text-container">
+                          <div class="count_top"><span>trader</span><span>< ASAP</span></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+                      <div>
+                        <div class="count standard">
+                          <?php echo ($gpTip['fast']) ?>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="text-container">
+                          <div class="count_top"><span>fast</span><span>< 2m</span></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+                      <div>
+                        <div class="count safe_low" id="medTxTip">
+                          <?php echo ($gpTip['standard']) ?>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="text-container">
+                          <div class="count_top"><span>standard</span><span>< 5m</span></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Divide by 1000000000 to represent in Gwei -->
+                    <p class="base-fee">Next block base fee: <?php echo ($baseFee['baseFeePerGas']/1000000000) ?></p>
+                    <p class="base-fee">Previous block base fee: <?php echo ($baseFee['nextBaseFeePerGas']/1000000000) ?></p>
+
+                  </div>
+                </div>
+
               </div>
             </div>
-          <!-- /top tiles end -->
+            <!-- /top tiles end -->
 
-          <!-- blogpost starts -->
+            <!-- blogpost starts -->
             <div class="row table_row blogPost">
               <div class="col-md-12 col-sm-12 col-xs-12 table-cell">
                 <div class="x_panel tile table_cell">
@@ -209,7 +219,7 @@
                 </div>
               </div>
             </div>
-          <!--/blogpost ends -->
+            <!--/blogpost ends -->
 
           <!-- svg ad section -->
           <?php require('./adSvg.php'); ?>
@@ -461,7 +471,26 @@
     
 
 <!-- Custom Theme Scripts -->
-    <script>
+  <script>
+    $('.btn-toggle').click(function() {
+      // Handle transaction type buttons toggle  
+      if ($(this).find('.btn-primary').size()>0) {
+        $(this).find('.btn').toggleClass('btn-primary');
+      }
+      $(this).find('.btn').toggleClass('btn-default');
+
+      // Show legacy tx gas metrics
+      if($('#legacy-tx').hasClass('btn-primary')){
+        $('.legacy-tx-type').show();
+        $('.new-tx-type').hide();
+      } 
+
+      // Show EIP-1559 related gas metrics
+      if($('#new-tx').hasClass('btn-primary')){
+        $('.legacy-tx-type').hide();
+        $('.new-tx-type').show();
+      }
+    });
 
     var exchangeRate = <?php echo ($exchangeRate) ?>;
     var currSymbol = "<?php echo ($currString) ?>"
@@ -506,178 +535,141 @@
         $("#fiatFee").val(fiatString);
         $("#ethFee").val(ethFee);
       })
-  
-  
 
+      //Data for Transaction Count by Gas Price Graph
+      if ($('#mybarChart2').length ){ 
 
-
-    //Data for Transaction Count by Gas Price Graph
-
-        if ($('#mybarChart2').length ){ 
-			  
 			  var ctx = document.getElementById("mybarChart2");
 			  var mybarChart = new Chart(ctx, {
-				type: 'bar',
-				data: {
-				  labels: ["≤1", "1≤4", "4≤20", "20≤50", ">50"],
-				  datasets: [{
-                    label: "Percent of transactions",  
-					backgroundColor: "#26B99A",
-					data: <?php echo '[' . $cat1TxPct. ',' . $cat2TxPct . ',' . $cat3TxPct . ',' . $cat4TxPct . ','. $cat5TxPct .']'; ?>
-				  }], 
-				},
+          type: 'bar',
+          data: {
+            labels: ["≤1", "1≤4", "4≤20", "20≤50", ">50"],
+            datasets: [{
+                      label: "Percent of transactions",  
+            backgroundColor: "#26B99A",
+            data: <?php echo '[' . $cat1TxPct. ',' . $cat2TxPct . ',' . $cat3TxPct . ',' . $cat4TxPct . ','. $cat5TxPct .']'; ?>
+            }], 
+          },
 
-				options: {
-                    legend: {
-                        display: false
-                    },
-				  scales: {
-					yAxes: [{
-					  ticks: {
-						beginAtZero: true
-					  },
-						scaleLabel:{
-							display:true,
-							labelString:"% of transactions"
-						}
-					}],
-					xAxes:[{
-						scaleLabel:{
-							display:true,
-							labelString:"Gas price category"
-						}
+          options: {
+            legend: {
+                display: false
+            },
+            scales: {
+              yAxes: [{
+                ticks: {
+                beginAtZero: true
+                },
+                scaleLabel:{
+                  display:true,
+                  labelString:"% of transactions"
+                }
+              }],
+              xAxes:[{
+                scaleLabel:{
+                  display:true,
+                  labelString:"Gas price category"
+                }
 
-					}]
-				  }
-				}
-			  });
-        }
-
-        //Data for Confirmation Time by Gas Price Graph
-
-        if ($('#mybarChart').length ){ 
-			  
-			  var ctx = document.getElementById("mybarChart");
-			  var mybarChart = new Chart(ctx, {
-				type: 'bar',
-				data: {
-				  labels: [<?php echo($priceWaitLabels);?>],
-				  datasets: [{
-					label: 'Median Time to Confirm',
-					backgroundColor: "#26B99A",
-					data: [<?php echo($priceWaitData); ?>]
-				  }]
-				},
-
-				options: {
-                    legend: {
-                        display: false
-                    },
-				  scales: {
-					yAxes: [{
-					  ticks: {
-						beginAtZero: true
-					  },
-						scaleLabel:{
-							display:true,
-							labelString:"Time to Confirm (min)"
-						}
-					}],
-					xAxes:[{
-						scaleLabel:{
-							display:true,
-							labelString:"Gas price (gwei)"
-						}
-
-					}]
-				  }
-				}
-			  });
-			  
-			} 
-
-      
-
-    //Speedometer
-			  
-          if ($('#speedometer').length ){
-              var speedometer;
-              speedometer = new Speedometer ('speedometer', {theme: 'default'});
-              speedometer.draw ();
-              getSpeed();
-              //setInterval(getSpeed,5000);
-              
-               }
-
-
-          function getSpeed (){
-
-          
-                    $.ajax({
-		    url: "json/ethgasAPI.json",
-		                      method: "GET",
-                              dataType: "json",
-		                      success: function(data) {
-			                          speedArray  = data;
-                                var speed = speedArray['speed']*100;
-                                var blockNum = speedArray['blockNum'];
-                                updateSpeedo (speed,blockNum);
-                                var out = "Last Block: " + blockNum;
-                                $('#blockNum').text(out);
-                                
-                          }               
-                
-                    });
-          };
-
-          function updateSpeedo (speedInt, blockNum){
-
-            var curSpeed = speedometer.value();
-
-            if (curSpeed === speedInt){
-                return;
-
-            } 
-            else {
-                speedometer.animatedUpdate(speedInt,1000);
+              }]
             }
-            
+          }
+        });
+      }
 
+    //Data for Confirmation Time by Gas Price Graph
+    if ($('#mybarChart').length ){ 
+      
+      var ctx = document.getElementById("mybarChart");
+      var mybarChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [<?php echo($priceWaitLabels);?>],
+        datasets: [{
+        label: 'Median Time to Confirm',
+        backgroundColor: "#26B99A",
+        data: [<?php echo($priceWaitData); ?>]
+        }]
+      },
 
+      options: {
+                  legend: {
+                      display: false
+                  },
+        scales: {
+        yAxes: [{
+          ticks: {
+          beginAtZero: true
+          },
+          scaleLabel:{
+            display:true,
+            labelString:"Time to Confirm (min)"
+          }
+        }],
+        xAxes:[{
+          scaleLabel:{
+            display:true,
+            labelString:"Gas price (gwei)"
           }
 
-      //Curency Support
-      
-            $("#eur").click(function(){
-                 
-                location = location.origin + "/index.php?curr=eur";
-			          
-                                                                     
-            });
-            
-            $("#usd").click(function(){
-                 
-                location = location.origin + "/index.php?curr=usd";
-			          
-                                                                     
-            });
-          
-            $("#cny").click(function(){
+        }]
+        }
+      }
+      });
+    } 
 
-                location = location.origin + "/index.php?curr=cny";
-                               
-			        
-                                                                     
-            });
+    //Speedometer
+    if ($('#speedometer').length ){
+        var speedometer;
+        speedometer = new Speedometer ('speedometer', {theme: 'default'});
+        speedometer.draw ();
+        getSpeed();
+        //setInterval(getSpeed,5000);
+    }
 
-            $("#gbp").click(function(){
-                location = location.origin + "/index.php?curr=gbp";                                                    
-            });
+    function getSpeed (){   
+      $.ajax({
+		    url: "json/ethgasAPI.json",
+		    method: "GET",
+        dataType: "json",
+		    success: function(data) {
+			    speedArray  = data;
+          var speed = speedArray['speed']*100;
+          var blockNum = speedArray['blockNum'];
+          updateSpeedo (speed,blockNum);
+          var out = "Last Block: " + blockNum;
+          $('#blockNum').text(out);                    
+        }               
+      });
+    };
 
-         
+    function updateSpeedo (speedInt, blockNum){
+      var curSpeed = speedometer.value();
 
+      if (curSpeed === speedInt){
+        return;
+      } 
+      else {
+        speedometer.animatedUpdate(speedInt,1000);
+      }
+    }
 
+    //Curency Support 
+    $("#eur").click(function(){
+      location = location.origin + "/index.php?curr=eur";                                  
+    });
+    
+    $("#usd").click(function(){
+        location = location.origin + "/index.php?curr=usd";
+    });
+  
+    $("#cny").click(function(){
+      location = location.origin + "/index.php?curr=cny";
+    });
 
+    $("#gbp").click(function(){
+        location = location.origin + "/index.php?curr=gbp";                                                    
+    });
   </script>
 
   <script src="build/js/custom3.js?d=3"></script>
