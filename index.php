@@ -197,8 +197,8 @@
                     </div>
 
                     <!-- Divide by 1000000000 to represent in Gwei -->
-                    <p class="base-fee">Next block base fee: <?php echo ($baseFee['baseFeePerGas']/1000000000) ?></p>
-                    <p class="base-fee">Previous block base fee: <?php echo ($baseFee['nextBaseFeePerGas']/1000000000) ?></p>
+                    <p class="base-fee">Next block base fee: <?php echo ($baseFee['baseFee']) ?></p>
+                    <p class="base-fee">Previous block base fee: <?php echo ($baseFee['nextBaseFee']) ?></p>
 
                   </div>
                 </div>
