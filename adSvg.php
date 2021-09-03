@@ -16,8 +16,8 @@
       }
 
       $defiPulse = new ad();
-      $defiPulse->desktopLink = 'https://solana.com/ignition?ethgas';
-      $defiPulse->mobileLink = 'https://solana.com/ignition?ethgas';
+      $defiPulse->desktopLink = 'https://bit.ly/3zIj37P';
+      $defiPulse->mobileLink = 'https://bit.ly/3zIj37P';
       $defiPulse->desktopImg = '/images/solana-desktop.png';
       $defiPulse->mobileImg = '/images/solana-mobile.png';
       $defiPulse->alt = 'Solana Banner';
