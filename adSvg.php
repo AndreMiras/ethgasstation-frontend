@@ -16,11 +16,11 @@
       }
 
       $defiPulse = new ad();
-      $defiPulse->desktopLink = 'http://bit.ly/3c1v8ds';
-      $defiPulse->mobileLink = 'http://bit.ly/3c1v8ds';
-      $defiPulse->desktopImg = '/images/farmer_desktop_purple.svg';
-      $defiPulse->mobileImg = '/images/farmer_mobile_purple.svg';
-      $defiPulse->alt = 'DFP Farmer Newsletter';
+      $defiPulse->desktopLink = 'https://bit.ly/2WO3hKh';
+      $defiPulse->mobileLink = 'https://bit.ly/2WO3hKh';
+      $defiPulse->desktopImg = '/images/dhedge-desktop.svg';
+      $defiPulse->mobileImg = '/images/dhedge-mobile.svg';
+      $defiPulse->alt = 'dHEDGE Banner';
 
       $ads = array($defiPulse);
 
