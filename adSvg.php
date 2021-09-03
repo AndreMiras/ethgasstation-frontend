@@ -16,11 +16,11 @@
       }
 
       $defiPulse = new ad();
-      $defiPulse->desktopLink = 'http://bit.ly/3c1v8ds';
-      $defiPulse->mobileLink = 'http://bit.ly/3c1v8ds';
-      $defiPulse->desktopImg = '/images/farmer_desktop_purple.svg';
-      $defiPulse->mobileImg = '/images/farmer_mobile_purple.svg';
-      $defiPulse->alt = 'DFP Farmer Newsletter';
+      $defiPulse->desktopLink = 'https://solana.com/ignition?ethgas';
+      $defiPulse->mobileLink = 'https://solana.com/ignition?ethgas';
+      $defiPulse->desktopImg = '/images/solana-desktop.png';
+      $defiPulse->mobileImg = '/images/solana-mobile.png';
+      $defiPulse->alt = 'Solana Banner';
 
       $ads = array($defiPulse);
 
